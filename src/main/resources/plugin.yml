@@ -3,3 +3,7 @@ version: '1.0'
 main: me.luhen.parcour.Parcour
 api-version: '1.21'
 authors: [ LuHen ]
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:${kotlin.version}
+commands:
+  parcour: {}

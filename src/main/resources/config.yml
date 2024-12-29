@@ -1,0 +1,53 @@
+messages:
+  timer-message: "<dark_green>Time:</dark_green> <red>%time% seconds </red>"
+  left-parkour: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <red>You have left the parkour </red>"
+  joined-parkour: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <red>You have started the parkour!</red>"
+  checkpoint-reached-message: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <red>You have reached a checkpoint, keep going!</red>"
+  parkour-finished: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> You have finished the parcour! Your time: %time%. Fails: %fails%."
+  commands-blocked-message: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <red>Commands are blocked inside parkour.</red>"
+  reload-message: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <green>Config file updated!</green>"
+  no-permission-message: "<gradient:#a31d9f:#362ec9>[Crystalized]</gradient> <red>You don't have permission to use this command</red>"
+  wrong-command-usage: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <red>Wrong command usage</red>."
+  reset-message: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <yellow>Starting again.</yellow>."
+  checkpoint-use-message: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <blue>Returning to previous checkpoint.</blue>."
+
+exit-location:
+  world:
+  x:
+  y:
+  z:
+  yaw:
+  pitch:
+
+starting-location:
+  world:
+  x:
+  y:
+  z:
+  yaw:
+  pitch:
+
+final-location:
+  world:
+  x:
+  y:
+  z:
+  yaw:
+  pitch:
+
+checkpoints:
+  - "0,96,-9,180,0"
+
+items:
+  return:
+    material: "compass"
+    displayname: "Return to Checkpoint"
+    lore: []
+  reset:
+    material: "clock"
+    displayname: "Reset the Run"
+    lore: []
+  leave:
+    material: "barrier"
+    displayname: "Leave parkour"
+    lore: []
