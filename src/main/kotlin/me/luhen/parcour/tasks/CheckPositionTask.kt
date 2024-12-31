@@ -18,7 +18,7 @@ class CheckPositionTask: BukkitRunnable() {
             } else if(Parcour.instance.checkPoints.containsKey(currentLoc)){
                 //Player is above a checkpoint, check if it is already his current checkpoint
                 Parcour.instance.checkPoints[currentLoc]?.let{ newCheckpoint ->
-                if(parcourPlayer.CheckPoint != newCheckpoint){
+                if(parcourPlayer.checkPoint != newCheckpoint){
                         Bukkit.getPluginManager().callEvent(PlayerReachCheckpointEvent(parcourPlayer, newCheckpoint))
                     }
                 }

@@ -13,7 +13,7 @@ class PlayerResetParkourListener: Listener {
         event.parcourPlayer.timerTask.reset()
         event.parcourPlayer.fails = 0
         Parcour.instance.startingLocation?.let {
-            event.parcourPlayer.CheckPoint = it
+            event.parcourPlayer.checkPoint = it
             event.parcourPlayer.player.teleport(it)
         }
         event.parcourPlayer.startingTime = System.currentTimeMillis()

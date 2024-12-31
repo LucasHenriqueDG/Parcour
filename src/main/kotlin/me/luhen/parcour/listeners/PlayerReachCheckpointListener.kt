@@ -10,7 +10,7 @@ class PlayerReachCheckpointListener: Listener {
 
     @EventHandler
     fun playerReachCheckpoint(event: PlayerReachCheckpointEvent){
-        event.parcourPlayer.CheckPoint = event.location
+        event.parcourPlayer.checkPoint = event.location
         VisualUtils.sendComponent(Parcour.instance.messages["checkpoint-reached-message"].toString(), event.parcourPlayer.player)
     }
 

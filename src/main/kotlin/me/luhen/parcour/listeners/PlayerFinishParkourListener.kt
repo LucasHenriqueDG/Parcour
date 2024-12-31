@@ -1,8 +1,10 @@
 package me.luhen.parcour.listeners
 
 import me.luhen.parcour.Parcour
+import me.luhen.parcour.data.PlayerStatsData
 import me.luhen.parcour.listeners.customevents.PlayerFinishParkourEvent
 import me.luhen.parcour.listeners.customevents.PlayerLeaveParkourEvent
+import me.luhen.parcour.tasks.DataAsyncTasks
 import me.luhen.parcour.utils.DataUtils
 import me.luhen.parcour.utils.PlaceholderUtils
 import me.luhen.parcour.visual.VisualUtils
@@ -14,6 +16,7 @@ class PlayerFinishParkourListener: Listener {
 
     @EventHandler
     fun playerFinishParkour(event: PlayerFinishParkourEvent){
+
         Parcour.instance.playersPlaying[event.player]?.let{ parcourPlayer ->
             //Get the time
             val currentTime = System.currentTimeMillis()
@@ -31,7 +34,13 @@ class PlayerFinishParkourListener: Listener {
                 event.player
             )
 
-            //Save the player time ...
+            //Save the player time
+            val stats = PlayerStatsData(event.player.uniqueId, parkourTime )
+            if(Parcour.instance.statsCache != null) {
+                Parcour.instance.statsCache?.updateStats(event.player.uniqueId, stats)
+            } else {
+                DataAsyncTasks.saveDataAsync(stats)
+            }
 
             //Make player leave
             Bukkit.getPluginManager().callEvent(PlayerLeaveParkourEvent(event.player))

@@ -6,8 +6,7 @@ import org.bukkit.entity.Player
 
 class ParcourPlayer(
     val player: Player,
-    var CheckPoint: Location,
+    var checkPoint: Location,
     var startingTime: Long,
     val timerTask: TimerTask,
-    var fails: Int = 0) {
-}
+    var fails: Int = 0)

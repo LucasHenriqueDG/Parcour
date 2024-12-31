@@ -2,7 +2,9 @@ package me.luhen.parcour.commands
 
 import me.luhen.parcour.Parcour
 import me.luhen.parcour.listeners.customevents.PlayerStartParkourEvent
+import me.luhen.parcour.tasks.DataAsyncTasks
 import me.luhen.parcour.utils.DataUtils
+import me.luhen.parcour.utils.PlaceholderUtils
 import me.luhen.parcour.visual.VisualUtils
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -39,6 +41,28 @@ class ParcourCommand: CommandExecutor {
                         }
                     }
 
+                    "stats" -> {
+                        if(sender is Player){
+                            Parcour.instance.statsCache?.let{ cache ->
+                                val stats = cache.getStats(sender.uniqueId)
+                                stats?.let {
+                                    val bestTime = DataUtils.formatTime(stats.bestTime)
+
+                                    VisualUtils.sendComponent(
+                                        PlaceholderUtils.replacePlaceholder(
+                                            Parcour.instance.messages["stats-message"].toString(),
+                                            "%best_time%",
+                                            bestTime
+                                        ),
+                                        sender
+                                    )
+                                } ?: VisualUtils.sendComponent(Parcour.instance.messages["no-stats-message"].toString(),
+                                    sender
+                                )
+                            } ?: temp1(sender)
+                        }
+                    }
+
                     else ->{}
 
                 }
@@ -48,6 +72,26 @@ class ParcourCommand: CommandExecutor {
 
 
         return true
+    }
+
+    private fun temp1(player: Player){
+        DataAsyncTasks.getDataAsync(player)?.thenAccept{ stats ->
+
+            stats?.let {
+                val bestTime = DataUtils.formatTime(stats.bestTime)
+                VisualUtils.sendComponent(
+                    PlaceholderUtils.replacePlaceholder(
+                        Parcour.instance.messages["stats-message"].toString(),
+                        "%best_time%",
+                        bestTime
+                    ),
+                    player
+                )
+            } ?: VisualUtils.sendComponent(Parcour.instance.messages["no-stats-message"].toString(),
+                player
+            )
+        }
+
     }
 
 }

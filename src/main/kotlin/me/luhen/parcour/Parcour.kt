@@ -2,9 +2,12 @@ package me.luhen.parcour
 
 import me.luhen.parcour.commands.ParcourCommand
 import me.luhen.parcour.data.ParcourPlayer
+import me.luhen.parcour.data.PlayerStatsCache
+import me.luhen.parcour.data.PlayerStatsManager
 import me.luhen.parcour.items.ParcourItems
 import me.luhen.parcour.listeners.*
 import me.luhen.parcour.tasks.CheckPositionTask
+import me.luhen.parcour.tasks.LoadCacheAsyncTask
 import me.luhen.parcour.utils.DataUtils
 import org.bukkit.Location
 import org.bukkit.entity.Player
@@ -19,6 +22,8 @@ class Parcour : JavaPlugin() {
     var finalLocation: Location? = null
     var items: ParcourItems? = null
     var checkPosTask: CheckPositionTask? = null
+    var statsCache: PlayerStatsCache? = null
+    var statsManager: PlayerStatsManager? = null
 
     companion object{
         lateinit var instance: Parcour
@@ -50,6 +55,27 @@ class Parcour : JavaPlugin() {
         server.pluginManager.registerEvents(PlayerInteractListener(), this)
 
         getCommand("parcour")?.setExecutor(ParcourCommand())
+
+        statsManager = if(config.getString("database-type").toString().lowercase() == "json"){
+            PlayerStatsManager(config.getString("json-file-name").toString())
+        } else {
+            PlayerStatsManager(
+                config.getString("mysql.host").toString(),
+                config.getInt("mysql.port"),
+                config.getString("mysql.database").toString(),
+                config.getString("mysql.user").toString(),
+                config.getString("mysql.password").toString(),
+            )
+        }
+
+        if(config.getBoolean("cache")){
+            statsCache = PlayerStatsCache()
+            statsManager?.let { manager ->
+                statsCache?.let { cache ->
+                    LoadCacheAsyncTask.loadCacheAsync(manager, cache)
+                }
+            }
+        }
 
     }
 

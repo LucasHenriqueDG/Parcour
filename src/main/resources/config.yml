@@ -10,6 +10,8 @@ messages:
   wrong-command-usage: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <red>Wrong command usage</red>."
   reset-message: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <yellow>Starting again.</yellow>."
   checkpoint-use-message: "<gradient:#d8ff14:#6aff00>[Parcour]</gradient> <blue>Returning to previous checkpoint.</blue>."
+  stats-message: "<gradient:#d8ff14:#6aff00>[Parcour]</green> <blue>Your best time is: %best_time%.</green>."
+  no-stats-message: "<gradient:#d8ff14:#6aff00>[Parcour]</red> <blue>You don't have any stats saved yet.</red>."
 
 exit-location:
   world:
@@ -51,3 +53,22 @@ items:
     material: "barrier"
     displayname: "Leave parkour"
     lore: []
+
+# ===== Data management =====
+
+#Should be "json" or "mysql"
+database-type: "json"
+
+#If the database used is json...
+json-file-name: "stats.json"
+
+#If the database used is mysql...
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "parcour_stats"
+  user: "ubuntu"
+  password: "admin"
+
+#should the plugin create a cache to store all the stats to avoid accessing the database every time?
+cache: false

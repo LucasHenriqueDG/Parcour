@@ -10,7 +10,7 @@ class PlayerTeleportToCheckpointListener: Listener {
 
     @EventHandler
     fun teleportToCheckpoint(event: PlayerTeleportToCheckpointEvent){
-        event.parcourPlayer.player.teleport(event.parcourPlayer.CheckPoint)
+        event.parcourPlayer.player.teleport(event.parcourPlayer.checkPoint)
         VisualUtils.sendComponent(Parcour.instance.messages["checkpoint-use-message"].toString(), event.parcourPlayer.player)
         event.parcourPlayer.fails += 1
     }
