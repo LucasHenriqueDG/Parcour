@@ -1,6 +1,7 @@
 package me.luhen.parcour.listeners
 
 import me.luhen.parcour.Parcour
+import me.luhen.parcour.enums.LeaveType
 import me.luhen.parcour.items.ParcourItems
 import me.luhen.parcour.listeners.customevents.PlayerLeaveParkourEvent
 import me.luhen.parcour.listeners.customevents.PlayerResetParkourEvent
@@ -22,7 +23,7 @@ class PlayerInteractListener: Listener {
                 when(event.player.inventory.itemInMainHand.type){
 
                     ParcourItems.leaveItem.type -> {
-                        Bukkit.getPluginManager().callEvent(PlayerLeaveParkourEvent(event.player))
+                        Bukkit.getPluginManager().callEvent(PlayerLeaveParkourEvent(event.player, LeaveType.REGULAR))
                     }
                     ParcourItems.resetItem.type -> {
                         Parcour.instance.playersPlaying[event.player]?.let{ parcourPlayer ->

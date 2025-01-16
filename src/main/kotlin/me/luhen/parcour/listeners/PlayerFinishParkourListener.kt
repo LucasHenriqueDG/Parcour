@@ -2,6 +2,7 @@ package me.luhen.parcour.listeners
 
 import me.luhen.parcour.Parcour
 import me.luhen.parcour.data.PlayerStatsData
+import me.luhen.parcour.enums.LeaveType
 import me.luhen.parcour.listeners.customevents.PlayerFinishParkourEvent
 import me.luhen.parcour.listeners.customevents.PlayerLeaveParkourEvent
 import me.luhen.parcour.tasks.DataAsyncTasks
@@ -43,7 +44,7 @@ class PlayerFinishParkourListener: Listener {
             }
 
             //Make player leave
-            Bukkit.getPluginManager().callEvent(PlayerLeaveParkourEvent(event.player))
+            Bukkit.getPluginManager().callEvent(PlayerLeaveParkourEvent(event.player, LeaveType.REGULAR))
         }
 
 

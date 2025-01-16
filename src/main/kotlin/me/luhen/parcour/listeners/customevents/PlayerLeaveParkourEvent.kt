@@ -1,10 +1,11 @@
 package me.luhen.parcour.listeners.customevents
 
+import me.luhen.parcour.enums.LeaveType
 import org.bukkit.entity.Player
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
 
-class PlayerLeaveParkourEvent(val player: Player): Event() {
+class PlayerLeaveParkourEvent(val player: Player, val type: LeaveType): Event() {
 
     companion object{
 

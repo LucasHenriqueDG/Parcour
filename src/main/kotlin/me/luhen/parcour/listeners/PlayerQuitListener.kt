@@ -1,6 +1,7 @@
 package me.luhen.parcour.listeners
 
 import me.luhen.parcour.Parcour
+import me.luhen.parcour.enums.LeaveType
 import me.luhen.parcour.listeners.customevents.PlayerLeaveParkourEvent
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
@@ -12,7 +13,7 @@ class PlayerQuitListener: Listener {
     @EventHandler
     fun playerQuit(event: PlayerQuitEvent){
         if(Parcour.instance.playersPlaying.containsKey(event.player)){
-            Bukkit.getPluginManager().callEvent(PlayerLeaveParkourEvent(event.player))
+            Bukkit.getPluginManager().callEvent(PlayerLeaveParkourEvent(event.player, LeaveType.REGULAR))
         }
     }
 

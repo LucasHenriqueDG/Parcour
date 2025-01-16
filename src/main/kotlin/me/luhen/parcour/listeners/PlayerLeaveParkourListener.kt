@@ -1,6 +1,7 @@
 package me.luhen.parcour.listeners
 
 import me.luhen.parcour.Parcour
+import me.luhen.parcour.enums.LeaveType
 import me.luhen.parcour.listeners.customevents.PlayerLeaveParkourEvent
 import me.luhen.parcour.visual.VisualUtils
 import org.bukkit.event.EventHandler
@@ -15,7 +16,9 @@ class PlayerLeaveParkourListener: Listener {
             val parcourPlayer = Parcour.instance.playersPlaying[event.player]
             parcourPlayer?.timerTask?.cancel()
             Parcour.instance.exitLocation?.let{
+                if(event.type == LeaveType.REGULAR){
                 event.player.teleport(it)
+                    }
             }
             Parcour.instance.playersPlaying.remove(event.player)
             event.player.inventory.clear()

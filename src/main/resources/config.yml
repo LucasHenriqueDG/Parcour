@@ -13,30 +13,35 @@ messages:
   stats-message: "<gradient:#d8ff14:#6aff00>[Parcour]</green> <blue>Your best time is: %best_time%.</green>."
   no-stats-message: "<gradient:#d8ff14:#6aff00>[Parcour]</red> <blue>You don't have any stats saved yet.</red>."
 
+#Where should the player be teleported when they leave the parcour
 exit-location:
-  world:
-  x:
-  y:
-  z:
-  yaw:
-  pitch:
+  world: "world"
+  x: 0
+  y: 100
+  z: 0
+  yaw: 180
+  pitch: 0
 
+#First location (will be used to check for nearby players)
 starting-location:
-  world:
-  x:
-  y:
-  z:
-  yaw:
-  pitch:
+  world: world
+  x: 100
+  y: 100
+  z: 100
+  yaw: 180
+  pitch: 0
 
+#Location which the player will need to reach to finish the parcour.
 final-location:
-  world:
-  x:
-  y:
-  z:
-  yaw:
-  pitch:
+  world: world
+  x: 150
+  y: 120
+  z: 150
+  yaw: 180
+  pitch: 0
 
+#The locations of the checkpoints, it needs yaw and pitch so when the player use the return item its position will have
+# the same as the ones set up here. Use the same format as the example bellow, in a list.
 checkpoints:
   - "0,96,-9,180,0"
 
@@ -44,17 +49,17 @@ items:
   return:
     material: "compass"
     displayname: "Return to Checkpoint"
-    lore: []
+    lore: ["<blue>Use this item to return to your</blue>", "<blue>previous checkpoint.</blue>"]
     model-data:
   reset:
     material: "clock"
     displayname: "Reset the Run"
-    lore: []
+    lore: ["<blue>Use this item to reset your run</blue>"]
     model-data:
   leave:
     material: "barrier"
     displayname: "Leave parkour"
-    lore: []
+    lore: ["<blue>Use this item to return to leave</blue>", "<blue>the parcour.</blue>"]
     model-data:
 
 # ===== Data management =====
