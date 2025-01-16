@@ -1,7 +1,9 @@
 package me.luhen.parcour.commands
 
 import me.luhen.parcour.Parcour
+import me.luhen.parcour.enums.JoinType
 import me.luhen.parcour.listeners.customevents.PlayerStartParkourEvent
+import me.luhen.parcour.tasks.CheckForPlayersTask
 import me.luhen.parcour.tasks.DataAsyncTasks
 import me.luhen.parcour.utils.DataUtils
 import me.luhen.parcour.utils.PlaceholderUtils
@@ -23,6 +25,12 @@ class ParcourCommand: CommandExecutor {
                     "reload" -> {
                         if(sender.hasPermission("parcour.adm")){
                             DataUtils.updateMessages()
+                            Parcour.instance.checkingTask?.cancel()
+                            val startingLocation = Parcour.instance.startingLocation
+                            startingLocation?.let {
+                                val task = CheckForPlayersTask(it)
+                                Parcour.instance.checkingTask = task.apply { runTaskTimer(Parcour.instance, 20L, 20L) }
+                            }
                             if(sender is Player){
                                 VisualUtils.sendComponent(Parcour.instance.messages["reload-message"].toString(), sender)
                             } else {
@@ -37,7 +45,7 @@ class ParcourCommand: CommandExecutor {
 
                     "start" -> {
                         if(sender is Player) {
-                            Bukkit.getPluginManager().callEvent(PlayerStartParkourEvent(sender))
+                            Bukkit.getPluginManager().callEvent(PlayerStartParkourEvent(sender, JoinType.COMMAND))
                         }
                     }
 

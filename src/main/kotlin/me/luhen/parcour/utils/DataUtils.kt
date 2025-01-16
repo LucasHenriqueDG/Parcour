@@ -8,6 +8,7 @@ import org.bukkit.Location
 object DataUtils {
 
     fun updateMessages(){
+        Parcour.instance.reloadConfig()
         val messages = Parcour.instance.config.getConfigurationSection("messages")
         messages?.getValues(false)?.forEach { (key, value) ->
             Parcour.instance.messages[key] = value.toString()

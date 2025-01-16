@@ -6,6 +6,7 @@ import me.luhen.parcour.data.PlayerStatsCache
 import me.luhen.parcour.data.PlayerStatsManager
 import me.luhen.parcour.items.ParcourItems
 import me.luhen.parcour.listeners.*
+import me.luhen.parcour.tasks.CheckForPlayersTask
 import me.luhen.parcour.tasks.CheckPositionTask
 import me.luhen.parcour.tasks.LoadCacheAsyncTask
 import me.luhen.parcour.utils.DataUtils
@@ -24,6 +25,7 @@ class Parcour : JavaPlugin() {
     var checkPosTask: CheckPositionTask? = null
     var statsCache: PlayerStatsCache? = null
     var statsManager: PlayerStatsManager? = null
+    var checkingTask: CheckForPlayersTask? = null
 
     companion object{
         lateinit var instance: Parcour
@@ -75,6 +77,10 @@ class Parcour : JavaPlugin() {
                     LoadCacheAsyncTask.loadCacheAsync(manager, cache)
                 }
             }
+        }
+        startingLocation?.let {
+            val task = CheckForPlayersTask(it)
+            checkingTask = task.apply { runTaskTimer(instance, 20L, 20L) }
         }
 
     }

@@ -52,18 +52,21 @@ class ParcourItems {
         val tempReturnMeta = tempReturn.itemMeta
         tempReturnMeta.displayName(VisualUtils.convertToComponent(returnName))
         tempReturnMeta.lore(returnLore)
+        tempReturnMeta.setCustomModelData(Parcour.instance.config.getInt("items.return.model-data"))
         tempReturn.setItemMeta(tempReturnMeta)
 
         val tempReset = ItemStack(resetMaterial)
         val tempResetMeta = tempReset.itemMeta
         tempResetMeta.displayName(VisualUtils.convertToComponent(resetName))
         tempResetMeta.lore(resetLore)
+        tempResetMeta.setCustomModelData(Parcour.instance.config.getInt("items.reset.model-data"))
         tempReset.setItemMeta(tempResetMeta)
 
         val tempLeave = ItemStack(leaveMaterial)
         val tempLeaveMeta = tempLeave.itemMeta
         tempLeaveMeta.displayName(VisualUtils.convertToComponent(leaveName))
         tempLeaveMeta.lore(leaveLore)
+        tempLeaveMeta.setCustomModelData(Parcour.instance.config.getInt("items.leave.model-data"))
         tempLeave.setItemMeta(tempLeaveMeta)
 
         returnItem = tempReturn

@@ -45,14 +45,17 @@ items:
     material: "compass"
     displayname: "Return to Checkpoint"
     lore: []
+    model-data:
   reset:
     material: "clock"
     displayname: "Reset the Run"
     lore: []
+    model-data:
   leave:
     material: "barrier"
     displayname: "Leave parkour"
     lore: []
+    model-data:
 
 # ===== Data management =====
 

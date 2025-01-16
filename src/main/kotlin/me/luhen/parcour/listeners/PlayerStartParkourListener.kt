@@ -2,6 +2,7 @@ package me.luhen.parcour.listeners
 
 import me.luhen.parcour.Parcour
 import me.luhen.parcour.data.ParcourPlayer
+import me.luhen.parcour.enums.JoinType
 import me.luhen.parcour.listeners.customevents.PlayerStartParkourEvent
 import me.luhen.parcour.tasks.CheckPositionTask
 import me.luhen.parcour.tasks.TimerTask
@@ -27,7 +28,9 @@ class PlayerStartParkourListener: Listener {
 
             event.player.inventory.clear()
             Parcour.instance.items?.giveItems(event.player)
-            event.player.teleport(startLoc)
+            if(event.type == JoinType.COMMAND){
+                event.player.teleport(startLoc)
+            }
             VisualUtils.sendComponent(Parcour.instance.messages["joined-parkour"].toString(), event.player)
 
             if (Parcour.instance.checkPosTask == null) {
